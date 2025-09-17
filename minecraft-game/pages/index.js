@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import * as THREE from 'three';
-import Iridescence from './Iridescence'; // Make sure this path is correct
+import Iridescence from './Iridescence';
 
 const MinecraftGame = () => {
   const mountRef = useRef(null);
