@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import * as THREE from 'three';
-
+import Iridescence from './Iridescence'; // Make sure this path is correct
 
 const MinecraftGame = () => {
   const mountRef = useRef(null);
@@ -39,7 +39,7 @@ const MinecraftGame = () => {
 
   const initGame = () => {
     const scene = new THREE.Scene();
-    scene.background = new THREE.Color(0x87CEEB);
+    // scene.background = new THREE.Color(0x87CEEB);
     scene.fog = new THREE.Fog(0x87CEEB, 50, 200);
     sceneRef.current = scene;
 
@@ -47,7 +47,7 @@ const MinecraftGame = () => {
     camera.position.set(playerRef.current.x, playerRef.current.y + 1.6, playerRef.current.z);
     cameraRef.current = camera;
 
-    const renderer = new THREE.WebGLRenderer({ antialias: true });
+    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
     renderer.setSize(window.innerWidth, window.innerHeight);
     renderer.shadowMap.enabled = true;
     renderer.shadowMap.type = THREE.PCFSoftShadowMap;
@@ -384,6 +384,15 @@ const MinecraftGame = () => {
 
   return (
     <div className="relative w-screen h-screen overflow-hidden bg-sky-300">
+      {/* Iridescence background */}
+      <div className="absolute inset-0 z-0">
+        <Iridescence
+          color={[1, 1, 1]}
+          mouseReact={false}
+          amplitude={0.1}
+          speed={1.0}
+        />
+      </div>
       {!gameStarted && (
         <div className="absolute inset-0 flex items-center justify-center z-50">
           <div className="bg-black bg-opacity-80 text-white p-8 rounded-lg text-center">
