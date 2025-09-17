@@ -415,6 +415,7 @@ const MinecraftGame = () => {
               <p>Right Click - Place block</p>
               <p>Numbers 1-6 - Select block type</p>
               <p>Space - Jump</p>
+              <p>Loads in a few seconds</p>
             </div>
             <button 
               onClick={startGame}
