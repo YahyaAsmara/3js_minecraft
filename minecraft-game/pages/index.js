@@ -48,6 +48,7 @@ const MinecraftGame = () => {
     cameraRef.current = camera;
 
     const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+    renderer.setClearColor(0x000000, 0);
     renderer.setSize(window.innerWidth, window.innerHeight);
     renderer.shadowMap.enabled = true;
     renderer.shadowMap.type = THREE.PCFSoftShadowMap;
@@ -383,7 +384,7 @@ const MinecraftGame = () => {
   }, []);
 
   return (
-    <div className="relative w-screen h-screen overflow-hidden bg-sky-300">
+    <div className="relative w-screen h-screen overflow-hidden">
       {/* Iridescence background */}
       <div className="absolute inset-0 z-0">
         <Iridescence
