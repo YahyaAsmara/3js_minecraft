@@ -396,10 +396,10 @@ const MinecraftGame = () => {
       {!gameStarted && (
         <div className="absolute inset-0 z-0">
           <Iridescence
-            color={[1, 1, 1]}
-            mouseReact={false}
+            color={[0, 0.6, 0.8]}
+            mouseReact={true}
             amplitude={0.1}
-            speed={1.0}
+            speed={1.4}
           />
         </div>
       )}
