@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import * as THREE from 'three';
+import Iridescence from './Iridescence';
 
 const MinecraftGame = () => {
   const mountRef = useRef(null);
@@ -173,8 +174,9 @@ const MinecraftGame = () => {
     const handleMouseMove = (e) => {
       if (isPointerLockedRef.current) {
         const mouse = mouseRef.current;
-        mouse.x += e.movementX * mouse.sensitivity;
-        mouse.y += e.movementY * mouse.sensitivity;
+        // Invert X and Y for correct look direction
+        mouse.x -= e.movementX * mouse.sensitivity;
+        mouse.y -= e.movementY * mouse.sensitivity;
         mouse.y = Math.max(-Math.PI/2, Math.min(Math.PI/2, mouse.y));
       }
     };
@@ -381,26 +383,35 @@ const MinecraftGame = () => {
   }, []);
 
   return (
-    <div className="relative w-screen h-screen overflow-hidden bg-sky-300">
+    <div className="relative w-screen h-screen overflow-hidden">
       {!gameStarted && (
-        <div className="absolute inset-0 flex items-center justify-center z-50">
-          <div className="bg-black bg-opacity-80 text-white p-8 rounded-lg text-center">
-            <h2 className="text-2xl font-bold mb-4">Minecraft Three.js</h2>
-            <div className="text-left mb-6">
-              <p className="font-bold mb-2">Controls:</p>
-              <p>WASD - Move around</p>
-              <p>Mouse - Look around</p>
-              <p>Left Click - Remove block</p>
-              <p>Right Click - Place block</p>
-              <p>Numbers 1-6 - Select block type</p>
-              <p>Space - Jump</p>
+        <div className="absolute inset-0 w-full h-full z-50">
+          <Iridescence
+            color={[1, 1, 1]}
+            mouseReact={false}
+            amplitude={0.1}
+            speed={1.0}
+            style={{ position: 'absolute', width: '100%', height: '100%', zIndex: 0 }}
+          />
+          <div className="absolute inset-0 flex items-center justify-center z-10">
+            <div className="bg-black bg-opacity-80 text-white p-8 rounded-lg text-center">
+              <h2 className="text-2xl font-bold mb-4">Minecraft Three.js</h2>
+              <div className="text-left mb-6">
+                <p className="font-bold mb-2">Controls:</p>
+                <p>WASD - Move around</p>
+                <p>Mouse - Look around</p>
+                <p>Left Click - Remove block</p>
+                <p>Right Click - Place block</p>
+                <p>Numbers 1-6 - Select block type</p>
+                <p>Space - Jump</p>
+              </div>
+              <button 
+                onClick={startGame}
+                className="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded"
+              >
+                Start Game
+              </button>
             </div>
-            <button 
-              onClick={startGame}
-              className="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded"
-            >
-              Start Game
-            </button>
           </div>
         </div>
       )}
