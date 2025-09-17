@@ -386,13 +386,19 @@ const MinecraftGame = () => {
     <div className="relative w-screen h-screen overflow-hidden">
       {!gameStarted && (
         <div className="absolute inset-0 w-full h-full z-50">
-          <Iridescence
-            color={[1, 1, 1]}
-            mouseReact={false}
-            amplitude={0.1}
-            speed={1.0}
-            style={{ position: 'absolute', width: '100%', height: '100%', zIndex: 0 }}
-          />
+          {/* Blue background layer */}
+          <div className="absolute inset-0 w-full h-full bg-sky-300" style={{ zIndex: 0 }} />
+          {/* Iridescence overlay with partial opacity */}
+          <div className="absolute inset-0 w-full h-full" style={{ zIndex: 1, pointerEvents: 'none' }}>
+            <Iridescence
+              color={[1, 1, 1]}
+              mouseReact={false}
+              amplitude={0.1}
+              speed={1.0}
+              style={{ width: '100%', height: '100%', opacity: 0.7 }}
+            />
+          </div>
+          {/* Start menu content */}
           <div className="absolute inset-0 flex items-center justify-center z-10">
             <div className="bg-black bg-opacity-80 text-white p-8 rounded-lg text-center">
               <h2 className="text-2xl font-bold mb-4">Minecraft Three.js</h2>
