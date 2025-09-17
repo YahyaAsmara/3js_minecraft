@@ -37,9 +37,11 @@ const MinecraftGame = () => {
 
   const blockTypes = ['grass', 'dirt', 'stone', 'wood', 'leaves', 'sand'];
 
-  const initGame = () => {
+  const initGame = (gameStartedParam = false) => {
     const scene = new THREE.Scene();
-    // scene.background = new THREE.Color(0x87CEEB);
+    if (gameStartedParam) {
+      scene.background = new THREE.Color(0x87CEEB);
+    }
     scene.fog = new THREE.Fog(0x87CEEB, 50, 200);
     sceneRef.current = scene;
 
@@ -47,8 +49,13 @@ const MinecraftGame = () => {
     camera.position.set(playerRef.current.x, playerRef.current.y + 1.6, playerRef.current.z);
     cameraRef.current = camera;
 
-    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-    renderer.setClearColor(0x000000, 0);
+    // Only set alpha true if not gameStarted, so background is visible after
+    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: !gameStartedParam });
+    if (gameStartedParam) {
+      renderer.setClearColor(0x87CEEB, 1);
+    } else {
+      renderer.setClearColor(0x000000, 0);
+    }
     renderer.setSize(window.innerWidth, window.innerHeight);
     renderer.shadowMap.enabled = true;
     renderer.shadowMap.type = THREE.PCFSoftShadowMap;
@@ -368,7 +375,7 @@ const MinecraftGame = () => {
   const startGame = () => {
     setGameStarted(true);
     setTimeout(() => {
-      initGame();
+      initGame(true);
     }, 100);
   };
 
@@ -385,15 +392,17 @@ const MinecraftGame = () => {
 
   return (
     <div className="relative w-screen h-screen overflow-hidden">
-      {/* Iridescence background */}
-      <div className="absolute inset-0 z-0">
-        <Iridescence
-          color={[1, 1, 1]}
-          mouseReact={false}
-          amplitude={0.1}
-          speed={1.0}
-        />
-      </div>
+      {/* Iridescence background only when game not started */}
+      {!gameStarted && (
+        <div className="absolute inset-0 z-0">
+          <Iridescence
+            color={[1, 1, 1]}
+            mouseReact={false}
+            amplitude={0.1}
+            speed={1.0}
+          />
+        </div>
+      )}
       {!gameStarted && (
         <div className="absolute inset-0 flex items-center justify-center z-50">
           <div className="bg-black bg-opacity-80 text-white p-8 rounded-lg text-center">
