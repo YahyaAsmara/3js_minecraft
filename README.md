@@ -2,13 +2,9 @@
 
 A web-based Minecraft clone built with React and Three.js, featuring block-based world generation and physics-based movement.
 
-<div style="text-align: center;">
   ![Start Screen](images/start_screen.png "Start Screen")
-</div>
 
-<div style="text-align: center;">
   ![Game Screen](images/game_screen.png "Game Screen")
-</div>
 
 ## Features
 
