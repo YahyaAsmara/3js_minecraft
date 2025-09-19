@@ -2,6 +2,14 @@
 
 A web-based Minecraft clone built with React and Three.js, featuring block-based world generation and physics-based movement.
 
+<div style="text-align: center;">
+  ![Start Screen](images/start_screen.png "Start Screen")
+</div>
+
+<div style="text-align: center;">
+  ![Game Screen](images/game_screen.png "Game Screen")
+</div>
+
 ## Features
 
 - **3D Block World**: Procedurally generated 32x32 terrain with 6 block types
@@ -16,6 +24,10 @@ A web-based Minecraft clone built with React and Three.js, featuring block-based
 - **Numbers 1-6**: Select block type
 
 ## Quick Start
+
+https://3js-minecraft.vercel.app/
+
+or
 
 ```bash
 git clone https://github.com/yourusername/minecraft-threejs.git
